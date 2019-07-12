@@ -3,7 +3,7 @@ var FormView = {
   $form: $('form'),
 
   initialize: function() {
-    $('.submit').on('submit', FormView.handleSubmit);
+    $('.submit').on('click', FormView.handleSubmit);
     $('.refresh').on('click', FormView.refreshMessages);
   },
 
@@ -16,7 +16,7 @@ var FormView = {
     var message = {
       username: App.username,
       text: $('#message').val(),
-      //roomname: '4chan'
+      roomname: RoomsView.roomName
     };
     Parse.create(message, function () {
       console.log('sending message');
@@ -25,6 +25,7 @@ var FormView = {
     App.fetch(function () {
       console.log('refresh messages');
     });
+    $('#message').val('');
   },
 
   setStatus: function(active) {
