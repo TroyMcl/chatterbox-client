@@ -13,17 +13,21 @@ var FormView = {
 
     console.log('click!');
 
+    //Create message object to send to Parse server
     var message = {
       username: App.username,
       text: $('#message').val(),
       roomname: RoomsView.roomName
     };
+    //Send message to the server
     Parse.create(message, function () {
       console.log('sending message');
     });
-
+    //Refresh the message list displayed
+    App.startSpinner();
     App.fetch(function () {
       console.log('refresh messages');
+      App.stopSpinner();
     });
     $('#message').val('');
   },
@@ -36,8 +40,11 @@ var FormView = {
   refreshMessages: function(event) {
     event.preventDefault();
 
+    //Refresh the message list displayed
+    App.startSpinner();
     App.fetch(function () {
       console.log('refresh with button');
+      App.stopSpinner();
     });
   }
 
