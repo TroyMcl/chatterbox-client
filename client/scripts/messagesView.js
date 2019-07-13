@@ -24,6 +24,20 @@ var MessagesView = {
         }
       }
     }
-  }
 
+    MessagesView.addFriendClass(true);
+  },
+
+  addFriendClass: function(isRender) {
+
+    var elements = document.querySelectorAll(".chat h1");
+    for (var i = 0; i < elements.length; i++) {
+      if (isRender) {
+        elements[i].addEventListener("click", Friends.addFriends);
+      }
+      if (_.contains(Friends.friendsList, elements[i].textContent)) {
+        elements[i].classList.add('friend');
+      }
+    }
+  }
 };
